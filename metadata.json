@@ -1,0 +1,5 @@
+{
+  "name": "Enel SP Substation Viewer",
+  "description": "An interactive map application to visualize and identify Enel São Paulo energy substations (ETDs) and operational bases, powered by Gemini for intelligent location queries.",
+  "requestFramePermissions": []
+}
