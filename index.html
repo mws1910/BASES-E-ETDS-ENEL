@@ -4,71 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Enel SP - Visualizador de Subestações</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              enel: {
-                purple: '#6b21a8', // West
-                red: '#dc2626',    // Central/North
-                green: '#16a34a',  // South/ABC
-                olive: '#84cc16',  // East
-                brand: {
-                  pink: '#d60b52',   // Legacy/Global
-                  orange: '#f49300', // Legacy/Global
-                  brasil: {
-                    green: '#009640',
-                    yellow: '#FFD700',
-                    blue: '#004593'
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      /* Custom scrollbar for sidebar */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 3px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
-      .leaflet-container {
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-      }
-    </style>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
     "react-leaflet": "https://aistudiocdn.com/react-leaflet@^5.0.0",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "leaflet": "https://aistudiocdn.com/leaflet@^1.9.4",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
     "vite": "https://aistudiocdn.com/vite@^7.2.4",
-    "leaflet": "https://aistudiocdn.com/leaflet@^1.9.4"
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
 }
 </script>
