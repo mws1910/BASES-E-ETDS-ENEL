@@ -44,7 +44,7 @@ export const STATIONS: Substation[] = [
   { id: 's_base_sede', name: 'Enel Distribuição SP (sede)', type: 'BASE', zone: Zone.SOUTH_ABC, lat: -23.624993, lng: -46.704812 },
 
   { id: 's_etd_aguabranca', name: 'ETD Água Branca', code: 'ABR', type: 'ETD', zone: Zone.SOUTH_ABC, lat: -23.526833, lng: -46.670874 },
-  { id: 's_etd_parelheiros', name: 'ETD Parelheiros', code: 'PRL', type: 'ETD', zone: Zone.SOUTH_ABC, lat: -23.880578, lng: -46.744755 },
+  { id: 's_etd_parelheiros', name: 'ETD Parelheiros', code: 'PRE', type: 'ETD', zone: Zone.SOUTH_ABC, lat: -23.880578, lng: -46.744755 },
   { id: 's_etd_alexandre', name: 'ETD Alexandre Gusmão', code: 'AGU', type: 'ETD', zone: Zone.SOUTH_ABC, lat: -23.662262, lng: -46.714476 },
   { id: 's_etd_altoboavista', name: 'ETD Alto da Boa Vista', code: 'ABV', type: 'ETD', zone: Zone.SOUTH_ABC, lat: -23.635672, lng: -46.689863 },
   { id: 's_etd_belaalianca', name: 'ETD Bela Aliança', code: 'BAL', type: 'ETD', zone: Zone.SOUTH_ABC, lat: -23.547291, lng: -46.695075 },

@@ -1,15 +1,61 @@
 import { GoogleGenAI } from "@google/genai";
 import { Substation } from "../types";
 
-// Initialize the GoogleGenAI client with the API key from process.env
-// The guidelines state: The API key must be obtained exclusively from the environment variable process.env.API_KEY.
+// Initialize the client with the API key from process.env as per guidelines.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+/**
+ * Função de busca local (Fallback quando não há API Key)
+ */
+const localSearch = (message: string, currentStations: Substation[]): string => {
+  const normalizedMsg = message.toLowerCase();
+  
+  // Tenta encontrar estações pelo nome ou sigla
+  const foundStations = currentStations.filter(s => 
+    normalizedMsg.includes(s.name.toLowerCase()) || 
+    (s.code && normalizedMsg.includes(s.code.toLowerCase()))
+  );
+
+  if (foundStations.length === 0) {
+    return "No modo offline, não encontrei nenhuma estação com esse nome na sua mensagem. Tente digitar o nome exato da base ou ETD (ex: 'Barueri').";
+  }
+
+  // Monta resposta com a primeira estação encontrada (ou lista se houver poucas)
+  const mainStation = foundStations[0];
+  let responseText = `Encontrei informações sobre **${mainStation.name}**.\n`;
+  
+  if (mainStation.type === 'BASE') responseText += `É uma Base Operacional na zona ${mainStation.zone}.\n`;
+  else if (mainStation.type === 'ESD') responseText += `É uma ESD na zona ${mainStation.zone}.\n`;
+  else responseText += `É uma Subestação (ETD) na zona ${mainStation.zone}.\n`;
+
+  if (mainStation.address) {
+    responseText += `📍 Endereço: ${mainStation.address}\n`;
+  }
+
+  // Adiciona a TAG mágica para criar o botão
+  responseText += `\n{{STATION_ID:${mainStation.id}}}`;
+
+  if (foundStations.length > 1) {
+    responseText += `\n\nTambém encontrei outras similares: ${foundStations.slice(1, 4).map(s => s.name).join(', ')}.`;
+  }
+
+  return responseText;
+};
 
 export const sendMessageToGemini = async (
   message: string,
   currentStations: Substation[]
 ): Promise<string> => {
-  // Create a context string about the current known stations
+  
+  // --- MODO LOCAL (SEM API KEY) ---
+  // Check if API key is present in process.env
+  if (!process.env.API_KEY) {
+    // Simula um delay de rede para parecer natural
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return localSearch(message, currentStations);
+  }
+
+  // --- MODO AI (COM API KEY) ---
   const contextData = currentStations.map(s => 
     `- ${s.name} (ID: ${s.id}, Type: ${s.type}) in ${s.zone} zone. Lat: ${s.lat}, Lng: ${s.lng}. Address: ${s.address || 'N/A'}`
   ).join('\n');
@@ -57,6 +103,6 @@ export const sendMessageToGemini = async (
 
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Desculpe, encontrei um erro ao processar sua solicitação. Tente novamente.";
+    return "Ocorreu um erro na comunicação com a IA. Verifique sua conexão ou a chave de API.";
   }
 };

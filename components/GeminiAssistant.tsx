@@ -11,7 +11,7 @@ interface GeminiAssistantProps {
 const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ stations, onSelectStation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: 'Olá! Sou seu assistente virtual Enel. Pergunte-me sobre localização de subestações, zonas de cobertura ou detalhes das bases.' }
+    { role: 'model', text: 'Olá! Sou seu assistente Enel. Pergunte-me sobre a localização de uma ETD ou Base (ex: "Onde fica a Base Cotia?").' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -101,7 +101,7 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ stations, onSelectSta
         <span className="bg-white/20 p-1 rounded-full">
            <Zap className="text-white" fill="currentColor" size={20} />
         </span>
-        <span className="font-semibold hidden sm:inline text-white">Assistente Enel IA</span>
+        <span className="font-semibold hidden sm:inline text-white">Assistente Enel</span>
       </button>
     );
   }
@@ -114,7 +114,7 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ stations, onSelectSta
            <div className="bg-white/20 p-1.5 rounded-full">
              <Zap className="text-white" fill="currentColor" size={18} />
            </div>
-           <h3 className="font-bold text-lg">Assistente Enel IA</h3>
+           <h3 className="font-bold text-lg">Assistente Enel</h3>
         </div>
         <button onClick={() => setIsOpen(false)} className="hover:bg-white/20 p-1 rounded transition-colors">
           <X size={20} />
@@ -138,7 +138,7 @@ const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ stations, onSelectSta
           <div className="flex justify-start">
             <div className="bg-white border border-gray-200 rounded-lg p-3 rounded-bl-none shadow-sm flex items-center gap-2">
               <Loader2 className="animate-spin text-enel-brand-brasil-green" size={16} />
-              <span className="text-xs text-gray-500">Processando consulta...</span>
+              <span className="text-xs text-gray-500">Buscando informações...</span>
             </div>
           </div>
         )}
