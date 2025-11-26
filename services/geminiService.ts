@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { Substation } from "../types";
 
-// Initialize the client with the API key from process.env as per guidelines.
+// Initialize the client as per guidelines using process.env.API_KEY
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 /**
@@ -48,7 +48,6 @@ export const sendMessageToGemini = async (
 ): Promise<string> => {
   
   // --- MODO LOCAL (SEM API KEY) ---
-  // Check if API key is present in process.env
   if (!process.env.API_KEY) {
     // Simula um delay de rede para parecer natural
     await new Promise(resolve => setTimeout(resolve, 600));
